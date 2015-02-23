@@ -26,11 +26,17 @@ def countLines(directories, fileType):
 
 
 directories = ()
-for arg in sys.argv[1:]:
-    if os.path.isdir(arg):
-        directories += (arg,)
-    else:
-        print("\n\"%s\" is not a directory"%arg)
+if len(sys.argv) == 1:
+    directories += (".",)
+else:
+    for arg in sys.argv[1:]:
+        if os.path.isdir(arg):
+            directories += (arg,)
+        else:
+            print("\n\"%s\" is not a directory"%arg)
+if len(directories) == 0:
+    print("No directories found in argument list.\nExiting.\n")
+    exit()
   
 count = countLines(directories, (".cpp", ".hpp", ".h"))
 totalLines  = count['lines']
